@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServiceService } from '../service/service.service';
 
 @Component({
   selector: 'app-home',
@@ -8,25 +9,24 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  paises = [
-    {
-      nombre: 'Argentina',
-      subtitulo: 'Capital: Buenos Aires',
-      imagen: 'assets/argentina.jpg', // Ruta de la imagen
-      icono: 'assets/argentina-icon.png' // Ruta del icono
-    },
-    {
-      nombre: 'Brasil',
-      subtitulo: 'Capital: Brasilia',
-      imagen: 'assets/brasil.jpg',
-      icono: 'assets/brasil-icon.png'
-    },
-    {
-      nombre: 'Chile',
-      subtitulo: 'Capital: Santiago',
-      imagen: 'assets/chile.jpg',
-      icono: 'assets/chile-icon.png'
-    },
-    // Agrega más países según sea necesario
+
+  hola=[
+    {id:1, nombre:"Juan"},
+    {id:2,nombre:"Hugo"},
+    {id:3,nombre:"Pedro"}
   ];
+
+  paises:any[]=[]
+  continentes:any[]=[]
+
+   constructor(private service:ServiceService) { }
+
+ ngOnInit():void{
+    //obtener todos los paises
+    this.service.findAllCountries().subscribe((response)=>{
+      this.paises=response.data.countries;
+    });
+  }
+
+
 }

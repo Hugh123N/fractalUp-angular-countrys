@@ -14,32 +14,20 @@
   
     <!-- Sección de resultados -->
     <div class="row ">
+      @for(country of paises; track country.cod ){
       <div class="col-md-4">
         <div class="card">
           <img src="assets/image.png" class="card-img-top" alt="Imagen 1">
           <div class="card-body d-flex align-items-center">
             <img src="assets/image.png" class="icon" alt="Icono" >
             <div class="info">
-              <h5 style="color: rgb(25, 173, 231); font-weight: 600;">United Kingdom</h5>
-              <p>Subtítulo o descripción</p>
+              <h5 style="color: rgb(25, 173, 231); font-weight: 600;">{{country.name}}</h5>
+              <p>{{country.continent.name}}</p>
             </div>
           </div>
         </div>
       </div>
-  
-      <div class="col-md-4 target">
-        <div class="card">
-          <img src="assets/image.png" class="card-img-top" alt="Imagen 2">
-          <div class="card-body d-flex align-items-center">
-            <img src="assets/image.png" class="icon" alt="Icono 2">
-            <div class="info">
-              <h5>Título del País</h5>
-              <p>Subtítulo o descripción</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+    }
       <!-- Agrega más divs como este según sea necesario -->
     </div>
 </div>
