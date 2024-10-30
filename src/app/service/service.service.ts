@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 export class ServiceService {
 
   private url_base= 'https://countries.trevorblades.com/';
+  //para imagenes
+  private apiUrl = 'https://api.unsplash.com/search/photos';
+  private apiKey = 'JpGL8oG-SAlzuE4bQneYxkSjxrf9Iid65b-CDK6WMes';
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +31,6 @@ export class ServiceService {
 
       return this.executeQuery(query);
   }
-
   // Obtener detalles de un país por su código
   getCountryByCode(code: string): Observable<any> {
     const query = `
@@ -80,10 +82,14 @@ export class ServiceService {
     `;
     return this.executeQuery(query);
   }
-
   // Método para ejecutar la consulta
   private executeQuery(query: string): Observable<any> {
     return this.http.post<any>(this.url_base, { query });
   }
-
+  //**************metodo para obtener img************* */
+  //por nombre de pais
+  getCountryImage(countryName: string): Observable<any> {
+    const url = `https://api.unsplash.com/search/photos?query=${countryName}&client_id=JpGL8oG-SAlzuE4bQneYxkSjxrf9Iid65b-CDK6WMes`;
+    return this.http.get<any>(url);
+  }
 }

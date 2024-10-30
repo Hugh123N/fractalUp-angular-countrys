@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -31,8 +32,14 @@ export class HomeComponent implements OnInit{
     //obtener todos los paises
     this.service.findAllCountries().subscribe((response)=>{
       this.paises=response.data.countries;
-      this.filteredCountries = [...this.paises];//se lista todo al inicio
+      this.filteredCountries = this.paises.map((country) => ({
+        ...country,
+        imageUrl: '' // Campo para almacenar la URL de la imagen
+      }));
+      this.imagesForCountry();
+      
     });
+
     //obtener todos los continentes
     this.service.findAllContinents().subscribe((response)=>{
       this.continentes=response.data.continents;
@@ -44,6 +51,14 @@ export class HomeComponent implements OnInit{
     this.selectedCountryCode = code;
     this.service.getCountryByCode(code).subscribe((response) => {
       this.seleccionaPais = response.data.country;
+      //imagen para detalle pais
+      this.service.getCountryImage(this.seleccionaPais.name).subscribe((response) => {
+        if (response.results && response.results.length > 0) {
+          this.seleccionaPais.imageUrl = response.results[0].urls.small; // URL de la imagen pequeña
+        } else {
+          this.seleccionaPais.imageUrl = 'assets/image.png'; // Imagen por defecto si no se encuentra
+        }
+      });
     });
   }
 
@@ -55,6 +70,19 @@ export class HomeComponent implements OnInit{
   }
 
 /********************metodos aadicioanles*****************************/
+  // Cargar imágenes para cada país
+  imagesForCountry(): void {
+    this.filteredCountries.forEach((country) => {
+      this.service.getCountryImage(country.name).subscribe((response) => {
+        if (response.results && response.results.length > 0) {
+          country.imageUrl = response.results[0].urls.small; // URL de la imagen pequeña
+        } else {
+          country.imageUrl = 'assets/image.png'; // Imagen por defecto si no se encuentra
+        }
+      });
+    });
+  }
+
   clearSelection(): void {
     this.selectedCountryCode = null; // Limpia el país seleccionado
     this.seleccionaPais = null; // Limpia los detalles del país
@@ -65,6 +93,7 @@ export class HomeComponent implements OnInit{
     this.filteredCountries = this.paises.filter((country) =>
       country.name.toLowerCase().includes(query)
     );
+    this.imagesForCountry();
   }
 
 }
