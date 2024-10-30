@@ -25,7 +25,7 @@
                           <div (click)="getCountryDetails(country.code)" 
                                [ngClass]="{ 'active': selectedCountryCode === country.code }" 
                                class="card-body d-flex align-items-center">
-                              <img src="assets/image.png" class="icon" alt="Icono">
+                              <img [src]="country.flagUrl || 'assets/image.png'" class="icon" alt="Icono">
                               <div class="info">
                                   <h5 class="texto tit">{{ country.name }}</h5>
                                   <p class="texto">{{ country.continent.name }}</p>
@@ -43,7 +43,7 @@
                 <button class="close-btn" (click)="clearSelection()">X</button>
                 <img [src]="seleccionaPais.imageUrl || 'assets/image.png'" class="country-detail-img" alt="{{seleccionaPais.name}}">
                 <div class="country-info">
-                    <img src="assets/image.png" alt="Bandera" class="icon">
+                    <img [src]="seleccionaPais.flagUrl || 'assets/image.png'" alt="Bandera" class="icon">
                     <div>
                         <h5>{{ seleccionaPais.name }}</h5>
                         <p>{{ seleccionaPais.continent.name }}</p>
@@ -66,7 +66,7 @@
         <div class="card">
           <img [src]="country.imageUrl || 'assets/image.png'" class="card-img-top" alt="{{country.name}}">
           <div (click)="getCountryDetails(country.code)" [ngClass]="{ 'active': selectedCountryCode === country.code }" class="card-body d-flex align-items-center">
-            <img src="assets/image.png" class="icon" alt="Icono" >
+            <img [src]="country.flagUrl || 'assets/image.png'" class="icon" alt="Icono" >
             <div class="info">
               <h5 class="texto tit">{{country.name}}</h5>
               <p class="texto">{{country.continent.name}}</p>

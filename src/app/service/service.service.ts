@@ -92,4 +92,13 @@ export class ServiceService {
     const url = `https://api.unsplash.com/search/photos?query=${countryName}&client_id=JpGL8oG-SAlzuE4bQneYxkSjxrf9Iid65b-CDK6WMes`;
     return this.http.get<any>(url);
   }
+  // Método para obtener la bandera del país
+  getCountryBandera(countryName: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Client-ID ${this.apiKey}`);
+    const params = new HttpParams()
+      .set('query', `flag of ${countryName}`)
+      .set('per_page', '1'); // Limita a una sola imagen
+
+    return this.http.get<any>(this.apiUrl, { headers, params });
+  }
 }

@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit{
       this.paises=response.data.countries;
       this.filteredCountries = this.paises.map((country) => ({
         ...country,
-        imageUrl: '' // Campo para almacenar la URL de la imagen
+        imageUrl: '', // Campo para almacenar la URL de la imagen
+        flagUrl : ''   // URL para la bandera del país
       }));
       this.imagesForCountry();
       
@@ -59,6 +60,10 @@ export class HomeComponent implements OnInit{
           this.seleccionaPais.imageUrl = 'assets/image.png'; // Imagen por defecto si no se encuentra
         }
       });
+      //imagen bandera
+      this.service.getCountryBandera(this.seleccionaPais.name).subscribe((response) => {
+        this.seleccionaPais.flagUrl = response.results[0]?.urls.small || 'assets/image.png';
+      });
     });
   }
 
@@ -79,6 +84,10 @@ export class HomeComponent implements OnInit{
         } else {
           country.imageUrl = 'assets/image.png'; // Imagen por defecto si no se encuentra
         }
+      });
+      // Cargar bandera del país
+      this.service.getCountryBandera(country.name).subscribe((response) => {
+        country.flagUrl = response.results[0]?.urls.small || 'assets/image.png';
       });
     });
   }
