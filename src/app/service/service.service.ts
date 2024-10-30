@@ -65,7 +65,7 @@ export class ServiceService {
   }
 
   // Método para obtener la lista de continentes
-  getAllContinents(): Observable<any> {
+  findAllContinents(): Observable<any> {
     const query = `
       {
         continents {

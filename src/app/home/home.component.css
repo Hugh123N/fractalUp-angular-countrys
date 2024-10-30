@@ -3,7 +3,7 @@
     margin-top: 20px;
 }
 
-/* div buscar */
+/****************** div buscar *******************/
 .buscar {
     border-radius: 70px;
     background-color: aliceblue;
@@ -34,13 +34,13 @@
     background-color: rgb(25, 173, 231);
     color: white;
 }
-
-/* Tarjetas de países */
+/********************* Tarjetas de países ********************************/
 .card {
     display:block;
     border-radius: 30px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px -5px 15px rgb(84, 84, 84);
     margin: 10px;
+    padding: 0;
 }
 
 /* Imagen de la tarjeta */
@@ -54,9 +54,21 @@
 .card-body {
     display: flex;
     align-items: center;
+    border-radius: 0 0 20px 20px;
 }
-
-/* Icono */
+.card-body:hover{
+    cursor: pointer;
+}
+.card-body .tit{
+    color: rgb(25, 173, 231); font-weight: 600;
+}
+.card-body.active{
+    background-color:rgb(25, 173, 231) ;
+}
+.card-body.active .texto{
+    color: white;
+}
+/* Icono bandera pais*/
 .icon {
     width: 40px; /* Ajusta el tamaño del icono */
     height: 40px;
@@ -68,7 +80,67 @@
     display: flex;
     flex-direction: column;
 }
+/**********************DETALLE DE PAIS*********************************/
+/* Contenedor de detalles del país */
+.country-details {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-height: 450px;
+    overflow-y: auto;
+    position: fixed;
+}
+/* Botón de cerrar */
+.close-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+/* Imagen de detalle del país */
+.country-detail-img {
+    width: 100%;
+    height: 150px;
+    margin-top: 20px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
 
+/* Información general del país */
+.country-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.country-info img.icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.country-info h5 {
+    margin: 0;
+    color: #1A73E8;
+}
+
+.country-info p {
+    margin: 0;
+    color: #555;
+}
+
+/* Lista de regiones */
+ul {
+    padding-left: 20px;
+}
 /* Responsividad */
 @media (max-width: 768px) {
     .buscar {
