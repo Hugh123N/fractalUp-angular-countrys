@@ -12,9 +12,17 @@
 
 /* Logo */
 .logo {
-  width: 80px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 30px 20px;
+  width: 78%;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 10px;
+  background-color: #b8b8b8;
 }
 
 /* Nav Links */

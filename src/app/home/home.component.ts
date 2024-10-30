@@ -25,6 +25,16 @@ export class HomeComponent implements OnInit{
 
   //para estilos
   selectedCountryCode: string | null = null;
+  //continentes y modal
+  selectedContinentImg: string | null = null;
+  showFilterModal = false;
+  continentesImg = [
+    { name: 'África', image: 'assets/africa.png' },
+    { name: 'Asia', image: 'assets/asia.png' },
+    { name: 'Europa', image: 'assets/europa.png' },
+    { name: 'América', image: 'assets/norte.png' },
+    { name: 'Oceania', image: 'assets/oceania.png' }
+  ];
 
   constructor(private service:ServiceService) { }
 
@@ -104,5 +114,25 @@ export class HomeComponent implements OnInit{
     );
     this.imagesForCountry();
   }
-
+  /***********************CONTINENTES****************************** */
+  // Abre el modal al hacer clic en el input de búsqueda
+  openFilterModal(): void {
+    this.showFilterModal = true;
+  }
+  // Método para seleccionar un continente
+  selectContinentImg(continentName: string): void {
+    this.selectedContinentImg = continentName;
+  }
+  // Cierra el modal al hacer clic fuera de él o en "Limpiar"
+  closeFilterModal(): void {
+    this.showFilterModal = false;
+    this.selectedContinentImg=null;
+  }
+  // Método para limpiar la selección o filtros
+  clearFilter(event: Event): void {
+    event.preventDefault();
+    // Lógica para limpiar los filtros aplicados
+    this.showFilterModal = false;
+    this.selectedContinentImg=null;
+  }
 }

@@ -3,7 +3,7 @@
   <div class="row my-3 align-items-center buscar">
     <div class="col-md-6 ">
       <h6 style="margin: 8px auto auto 20px;">País</h6>
-      <input type="text" class="form-control" placeholder="Escribe el país que desees ver" [(ngModel)]="searchQuery" (input)="filterCountries()" aria-label="Pais">
+      <input type="text" class="form-control" placeholder="Escribe el país que desees ver" [(ngModel)]="searchQuery" (input)="filterCountries()" (focus)="openFilterModal()" aria-label="Pais">
     </div>
     <div class="col-md-3">
       <button class="btn btn-primary btn-search">
@@ -77,4 +77,21 @@
     }
     </div>
   }
+</div>
+
+<!-- Modal de filtrado por continente -->
+<div class="modal-backdrop" *ngIf="showFilterModal" (click)="closeFilterModal()"></div>
+<div class="filter-modal" *ngIf="showFilterModal">
+  <div class="filter-header">
+    <h6 class="filter-title">Filtrar por continentes</h6>
+    <a href="#" (click)="clearFilter($event)" class="clear-link">Limpiar</a>
+  </div>
+  <div class="filter-content">
+    <div class="row">
+      <div class="col-4 text-center" *ngFor="let continent of continentesImg">
+        <img [src]="continent.image" alt="{{ continent.name }}" [ngClass]="{'selected': selectedContinentImg === continent.name}" (click)="selectContinentImg(continent.name)" class="continent-image">
+        <p class="continent-name">{{ continent.name }}</p>
+      </div>
+    </div>
+  </div>
 </div>
